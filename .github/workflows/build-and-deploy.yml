@@ -1,19 +1,14 @@
-name: Format check on push
-on: push
+# Name of the workflow that is displayed on a user’s repository actions page 
+name: dotnet-code-analysis
+# Triggers the workflow on push or pull request events  
+on: [push, pull_request] 
+# Triggers the workflow on push or pull request events 
 jobs:
-  dotnet-format:
-    runs-on: ubuntu-latest
+  dotnet-code-analysis:
+  # runs-on keyword to create a job for each operating system
+    runs-on: windows-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
-
-      - name: Add dotnet-format problem matcher
-        uses: xt0rted/dotnet-format-problem-matcher@v1
-
-      - name: Restore dotnet tools
-        uses: xt0rted/dotnet-tool-restore@v1
-
-      - name: Run dotnet format
-        uses: xt0rted/dotnet-format@v1
+      - name: Run analysis
+        uses: roslyn/action-name@master
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
